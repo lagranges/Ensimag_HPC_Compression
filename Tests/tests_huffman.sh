@@ -1,19 +1,19 @@
 #!/bin/bash
 
-EXE=(../tp_huffman)
+EXE=(../hpcompressor)
 
 if [ $# = 0 ] ; then
-	echo "usage: tests_huffman <FICHIER TEXTE A COMPRESSER PUIS DECOMPRESSER>"
+	echo "usage: hpcompressor <file name to compress then decompress>"
 else
 	echo "[ Test $1 ]"
 	$EXE -c $1 $1.comp
-	$EXE -d $1.comp $1.comp.txt || echo "Essayez: cd .. ; make tp_huffman"
+	$EXE -d $1.comp $1.comp.txt || echo "Try: cd .. ; make"
 	ok=$(diff $1 $1.comp.txt)
 	echo ""
 	if [ "$ok" = "" ] ; then
-		echo "[ Resultat OK : $1 et $1.comp.txt sont IDENTIQUES ]"
+		echo "[ Result OK : $1 and $1.comp.txt are IDENTICAL  ]"
 	else
-		echo "[ Resultat KO : $1 et $1.comp.txt sont DIFFERENTS ]"
+		echo "[ Result KO : $1 and $1.comp.txt are DIFFERENTS ]"
 	fi
 fi ;
 

@@ -1,30 +1,31 @@
 
-CFLAGS = -g	
+CFLAGS = -c -Wall
 
 SRC_PACKAGES = dico.hpp dico.cpp \
                code_binary.hpp code_binaire.cpp \
                file_priority.hpp file_priority.cpp \
                tree.hpp tree.cpp
+Test_tree = tree.hpp tree.cpp
 
 EXE = hpcompressor test_file test_code test_tree test_dico
 
 
 all: $(EXE)
 
-hpcompressor: main_huffman.adb $(SRC_PACKAGES)
-	gcc $(CFLAGS) $@
+hpcompressor: main_huffman.cpp $(SRC_PACKAGES)
+	g++ $(CFLAGS) $@
 
-test_file: test_file.adb $(SRC_PACKAGES)
-	gcc $(CFLAGS) $@
+test_file: test_file.cpp $(SRC_PACKAGES)
+	g++ $(CFLAGS) $@
 
-test_tree: test_tree.adb $(SRC_PACKAGES)
-	gcc $(CFLAGS) $@
+test_tree: test_tree.cpp $(Test_tree)
+	g++ $(CFLAGS) $< -o $@
 
-test_code: test_code.adb $(SRC_PACKAGES)
-	gcc $(CFLAGS) $@
+test_code: test_code.cpp $(SRC_PACKAGES)
+	g++ $(CFLAGS) $@
 
-test_dico: test_dico.adb $(SRC_PACKAGES)
-	gcc $(CFLAGS) $@
+test_dico: test_dico.cpp $(SRC_PACKAGES)
+	g++ $(CFLAGS) $@
 
 clean:
 	rm -f b~* ~*

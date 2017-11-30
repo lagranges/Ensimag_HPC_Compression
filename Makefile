@@ -1,35 +1,24 @@
+CC=g++
+CFLAGS= -g
+OBJ= characters.o tree.o
+SOURCE_FILES = hpcompressor.cpp
+EXEC=hpcompressor
+TEST_SOURCE = test_*.cpp
 
-CFLAGS = -c -Wall
+all: $(EXEC)
 
-SRC_PACKAGES = dico.hpp dico.cpp \
-               code_binary.hpp code_binaire.cpp \
-               file_priority.hpp file_priority.cpp \
-               tree.hpp tree.cpp
-Test_tree = tree.hpp tree.cpp
+$(EXEC):$(OBJ)
+	$(CC) -o $@ $(SOURCE_FILES) $(OBJ)
+	
+.cpp.o:
+	$(CC) -c -Wall $< -o $@
 
-EXE = hpcompressor test_file test_code test_tree test_dico
+test: $(TEST_SOURCE)
 
+$(TEST_SOURCE): $(OBJ)
+	$(CC) -o $(basename $@) $@ $^
 
-all: $(EXE)
+clear:
+	rm -f *.o $(EXEC) $(basename $(TEST_SOURCE))
 
-hpcompressor: main_huffman.cpp $(SRC_PACKAGES)
-	g++ $(CFLAGS) $@
-
-test_file: test_file.cpp $(SRC_PACKAGES)
-	g++ $(CFLAGS) $@
-
-test_tree: test_tree.cpp $(Test_tree)
-	g++ $(CFLAGS) $< -o $@
-
-test_code: test_code.cpp $(SRC_PACKAGES)
-	g++ $(CFLAGS) $@
-
-test_dico: test_dico.cpp $(SRC_PACKAGES)
-	g++ $(CFLAGS) $@
-
-clean:
-	rm -f b~* ~*
-
-cleanall: clean
-	rm -f $(EXE) 
 	

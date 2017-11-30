@@ -3,7 +3,8 @@ CFLAGS= -g
 OBJ= characters.o tree.o
 SOURCE_FILES = hpcompressor.cpp
 EXEC=hpcompressor
-TEST_SOURCE = test_*.cpp
+TEST_SOURCE = $(wildcard test_*.cpp)
+RM_TEST = $(basename $(TEST_SOURCE))
 
 all: $(EXEC)
 
@@ -19,6 +20,8 @@ $(TEST_SOURCE): $(OBJ)
 	$(CC) -o $(basename $@) $@ $^
 
 clear:
-	rm -f *.o $(EXEC) $(basename $(TEST_SOURCE))
+	rm -f *.o $(EXEC) $(RM_TEST)
+
+
 
 	

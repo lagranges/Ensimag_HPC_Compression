@@ -16,8 +16,11 @@
         Makefile
 
     Compilation and Test Execution 
+        For execute some unit_test:
+            make test
+            ./test_* For example ./test_tree
         For compress/decompress a file:
-            make hpcompressor
+            make
             ./hpcompressor -c file_name compressed_file_name 
             (example ./hpcompressor -c Tests/francais.txt francais.txt.comp)
             ./main_huffman -d file_name compressed_file_name

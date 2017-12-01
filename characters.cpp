@@ -3,15 +3,15 @@
 
 bool Unit::operator<(const Unit& right) const
 {
-    return nb_presence < right.nb_presence;
+    return nb_presence > right.nb_presence;
 }
 
 // display object information -> For testing 
 void Characters::display()
 {
     while(!pq.empty()){
-        cout << pq.top().get_char() << 
-        "  " << pq.top().get_nb_presence() <<endl;
+        cout << pq.top().val << 
+        "  " << pq.top().nb_occurs <<endl;
         pq.pop();
     }
 }
@@ -28,11 +28,11 @@ Characters::Characters(string file_name)
     {
         frequencies[(int)ch]++;
     }
-    Unit u;
+    node u;
     for(int i=0; i<256;i++)
     {
         if(frequencies[i]>0){
-            u = Unit(i,frequencies[i]);
+            u = node(i,frequencies[i],NULL, NULL);
             pq.push(u);
         }
     }

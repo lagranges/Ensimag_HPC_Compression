@@ -6,18 +6,18 @@
 using namespace std;
 
 int main(){
-    Unit u;
-    priority_queue <Unit> pq;
-    u = Unit('a', 10);
+    node u;
+    priority_queue <node> pq;
+    u = node('a', 10, NULL, NULL);
     pq.push(u);
-    u = Unit('b', 20);
+    u = node('b', 20, NULL, NULL);
     pq.push(u);
-    u = Unit('c', 5);
+    u = node('c', 5, NULL, NULL);
     pq.push(u);
 
     cout <<"pq contains" << pq.size() << " elements \n";
     while(!pq.empty()){
-        cout << pq.top().get_char() << endl;
+        cout << pq.top().val << endl;
         pq.pop();
     }
 

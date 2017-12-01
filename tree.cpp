@@ -1,33 +1,44 @@
 #include "tree.hpp"
 
 
-Tree::Tree(char c)
+Tree::Tree(node *u)
 {
-    this->left = NULL;
-    this->right = NULL;
-    this->val = c;
+//     this->left = NULL;
+//     this->right = NULL;
+//     this->val = c;
+    this->root = u;
 }
 
-Tree::Tree(Tree *left, Tree *right)
-{
-    this->left = left;
-    this->right = right;
-}
+// Tree::Tree(Tree *left, Tree *right)
+// {
+    // this->left = left;
+    // this->right = right;
+// }
 
-Tree::Tree(Characters characters)
+Tree::Tree(Characters chars)
 {
-    priority_queue<Unit> pq = characters.get_frequencies();
-    pq.pop();
-    cout << pq.size() << endl;
-    cout << characters.get_frequencies().size() << endl;
+    priority_queue<node> pq = chars.get_frequencies();
+    node *u,*u1,*u2;
+    Tree *root_current;
+    if(pq.size()==1){
+        this->root = new node(pq.top());
+    } else {
+        while(pq.size()>=2){
+            u1 = new node(pq.top());
+            pq.pop();
+            u2 = new node(pq.top());
+            pq.pop();
+            u = new node(NULL, u1->nb_occurs+u2->nb_occurs, u1, u2);
+            pq.push(*u);
+        }
+        this->root = u;
+    }
 }
 
 void Tree::display()
 {
-    if(this->left != NULL) 
-        this->left->display();
-    printf("\t %c", this->val);
-    if(this->right != NULL) 
-        this->right->display();
+    cout << "Tree Display: " << endl;
+    this->root->display();
+    cout << endl;
 }
 

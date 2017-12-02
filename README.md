@@ -25,9 +25,8 @@ For auto test:
     cd Test
     ./tests_huffman.sh nom_fichier
 ## Authors
-Ondre
-Tuan
-
+* BOROVEC Ondrej 
+* LE Van Tuan 
 
     
     

@@ -4,9 +4,9 @@
 
 ## Introduction
 
-The project is implemted in C++ using, Open MPI.
-Input: a txt file/ a comp file (.comp is the extension of compressed file)
-Output: a comp file/ a txt file
+The project is implemented in C++ and Open MPI.
+* Input: a txt file/ a comp file (.comp is the extension of compressed file)
+* Output: a comp file/ a txt file
 
 ## Files
         

@@ -1,11 +1,6 @@
 #include <fstream>
 #include "characters.hpp"
 
-bool Unit::operator<(const Unit& right) const
-{
-    return nb_presence > right.nb_presence;
-}
-
 // display object information -> For testing 
 void Characters::display()
 {

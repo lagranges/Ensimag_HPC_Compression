@@ -3,17 +3,8 @@
 
 Tree::Tree(node *u)
 {
-//     this->left = NULL;
-//     this->right = NULL;
-//     this->val = c;
     this->root = u;
 }
-
-// Tree::Tree(Tree *left, Tree *right)
-// {
-    // this->left = left;
-    // this->right = right;
-// }
 
 Tree::Tree(Characters chars)
 {
@@ -28,7 +19,7 @@ Tree::Tree(Characters chars)
             pq.pop();
             u2 = new node(pq.top());
             pq.pop();
-            u = new node(NULL, u1->nb_occurs+u2->nb_occurs, u1, u2);
+            u = new node('\0', u1->nb_occurs+u2->nb_occurs, u1, u2);
             pq.push(*u);
         }
         this->root = u;
@@ -37,8 +28,8 @@ Tree::Tree(Characters chars)
 
 void Tree::display()
 {
-    cout << "Tree Display: " << endl;
+    cout << "Tree Display (for a node [val, nb_occurence, depth, is_leaf]):  " << endl;
     this->root->display();
-    cout << endl;
+    cout << "End tree display"<<endl;
 }
 

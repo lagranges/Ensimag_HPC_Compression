@@ -25,7 +25,7 @@ class Tree
         Tree(Characters characters);
 
         char get_val(){return val;}
-        
+        node* get_root(){return root;}
         // Get tree information
         void display();
 

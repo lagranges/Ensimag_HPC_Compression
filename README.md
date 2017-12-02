@@ -1,21 +1,21 @@
-    Parallel Compression using Huffman coding
+    # Parallel Compression using Huffman coding
 
-        High Performance Computing Project
+    # High Performance Computing Project
 
-    Introduction
+    ## Introduction
         
-  i     The project is implemted in C++ using, Open MPI.
+        The project is implemted in C++ using, Open MPI.
         Input: a txt file/ a comp file (.comp is the extension of 
                                                             compressed file)
         Output: a comp file/ a txt file
 
-    Fichiers
+    ## Files
         
         Source code (*.cpp, *.hpp)
         This README
         Makefile
 
-    Compilation and Test Execution 
+    ## Compilation and Test Execution 
         For execute some unit_test:
             make test
             ./test_* For example ./test_tree
@@ -28,7 +28,7 @@
         For checking:
             cd Test
             ./tests_huffman.sh nom_fichier
-    Authors
+    ## Authors
         Ondre
         Tuan
 

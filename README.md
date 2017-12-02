@@ -15,15 +15,28 @@ This README
 Makefile
 
 ## Compilation and Test Execution 
-For execute some unit_test:
-    make test
-    ./test_* For example ./test_tree
-For compress/decompress a file:
-    make
-    ./hpcompressor -c file_name compressed_file_name (example ./hpcompressor -c Tests/francais.txt francais.txt.comp)
-For auto test:
-    cd Test
-    ./tests_huffman.sh nom_fichier
+
+For executing the unit_tests:
+```
+make test
+./test_* 
+```
+* For example ./test_tree
+
+For compressing/decompressing a file:
+```
+make
+./hpcompressor -c file_name compressed_file_name 
+```
+* For example 
+```
+./hpcompressor -c Tests/francais.txt francais.txt.comp)
+```
+For checking the result:
+```
+cd Test
+./tests_huffman.sh file_name
+```
 ## Authors
 * BOROVEC Ondrej 
 * LE Van Tuan 

@@ -1,6 +1,7 @@
 #ifndef CHARACTERS_INCLUDED
 #define CHARACTERS_INCLUDED
 
+#include <fstream>
 #include <iostream>
 #include <queue>
 using namespace std;

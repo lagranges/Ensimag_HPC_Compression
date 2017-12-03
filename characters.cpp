@@ -1,4 +1,3 @@
-#include <fstream>
 #include "characters.hpp"
 
 // display object information -> For testing 

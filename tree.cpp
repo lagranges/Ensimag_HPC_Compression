@@ -30,6 +30,6 @@ void Tree::display()
 {
     cout << "Tree Display (for a node [val, nb_occurence, depth, is_leaf]):  " << endl;
     this->root->display();
-    cout << "End tree display"<<endl;
+    cout << "\nEnd tree display"<<endl;    
 }
 

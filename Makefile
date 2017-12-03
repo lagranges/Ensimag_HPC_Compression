@@ -1,6 +1,6 @@
 CC=g++
 CFLAGS= -g
-OBJ= characters.o tree.o dictionnary.o
+OBJ= characters.o tree.o dictionnary.o compressor.o
 SOURCE_FILES = hpcompressor.cpp
 EXEC=hpcompressor
 TEST_SOURCE = $(wildcard test_*.cpp)

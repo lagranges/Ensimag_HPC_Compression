@@ -8,7 +8,9 @@ class Generic
     protected:
         Dictionnary dict;
         Characters chars;
+        Tree tree;
         string file_name;
+        string compressed_file;
     public:
         virtual void generate(string result_file_name) = 0;
 };
@@ -22,7 +24,7 @@ class Compressor: public Generic
         Compressor(string file_name);
         virtual void generate(string compressed_file);
         // display compressed under binary codes
-        void display(string compressed_file);
+        void display();
 };
 
 class Decompressor: public Generic

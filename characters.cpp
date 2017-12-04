@@ -14,9 +14,10 @@ void Characters::display()
 Characters::Characters(string file_name)
 {
     ifstream my_file;
-    long frequencies[256] = {0};
+    long long int frequencies[256] = {0};
     my_file.open(file_name);
     char ch;
+    nb_chars = 0;
     // TODO Problem with french character
     while(my_file.get(ch))
     {
@@ -28,6 +29,7 @@ Characters::Characters(string file_name)
         if(frequencies[i]>0){
             u = node(i,frequencies[i],NULL, NULL);
             pq.push(u);
+            nb_chars += frequencies[i];
         }
     }
 }

@@ -10,9 +10,10 @@ Tree::Tree(Characters chars)
 {
     priority_queue<node> pq = chars.get_frequencies();
     node *u,*u1,*u2;
-    Tree *root_current;
     if(pq.size()==1){
-        this->root = new node(pq.top());
+        u1 = new node(pq.top());
+        u = new node('\0', u1->nb_occurs, u1, NULL);
+        this->root = u;
     } else {
         while(pq.size()>=2){
             u1 = new node(pq.top());

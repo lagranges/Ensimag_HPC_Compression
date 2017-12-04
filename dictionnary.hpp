@@ -17,11 +17,13 @@ class BinaryCode
         BinaryCode(){};
         ~BinaryCode(){};
         BinaryCode(deque<BIT> l):list(l){}; 
+        BinaryCode(char c);
         deque<BIT> get_list(){return list;};
         void push_back(BIT b){list.push_back(b); };
         void display();
         void operator+=(const BinaryCode& b);
         bool is_equal(BinaryCode const& b) const;
+        char get_first_char(Tree tree);
         // remove 8 first bits
         char get_one_byte();
 };

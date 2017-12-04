@@ -34,10 +34,14 @@ Dictionnary::Dictionnary(Tree tree)
             dict[top.nod.val] = BinaryCode(top.cod);
         }
         else{
-            c = code(*top.nod.left, top.cod, true);
-            explored_nodes.push(c);
-            c = code(*top.nod.right, top.cod, false);
-            explored_nodes.push(c);
+            if(top.nod.left != NULL){
+                c = code(*top.nod.left, top.cod, true);
+                explored_nodes.push(c);
+            }
+            if(top.nod.right != NULL){
+                c = code(*top.nod.right, top.cod, false);
+                explored_nodes.push(c);
+            }
         }
         
     }
@@ -99,7 +103,8 @@ bool operator==(BinaryCode const& a, BinaryCode const& b)
 char BinaryCode::get_one_byte(){
     int res=0;
     BIT b;
-    for(int i=0;i<8;i++){
+    for(int i=0;i<8;i++)
+    {
         if(!list.empty()){
             b = list.front();
             list.pop_front();
@@ -107,7 +112,6 @@ char BinaryCode::get_one_byte(){
             b = zero;
         }
         // Just for testing -> removable
-        cout << b;
         res = 2*res + b;
     }
     return (char) res;
@@ -117,8 +121,39 @@ char Dictionnary::get_char(BinaryCode bc)
 {
     char res = '\0';
     for(map<char,BinaryCode>::iterator it = dict.begin(); 
-        it!=dict.end(); it++){
+        it!=dict.end(); it++)
+        {
             if(bc==it->second) res = it->first;
         }
+    return res;
+}
+
+BinaryCode::BinaryCode(char c)
+{
+    int n = (int) c;
+    for(int i=0;i<8;i++)
+    {
+        list.push_front(((n>>i)&1)?one:zero);
+    }
+}
+
+char BinaryCode::get_first_char(Tree tree)
+{
+    deque<BIT> tmp = list;
+    char res = '\0';
+    BIT current_bit;
+    node* current_nod = tree.get_root();
+    while(!tmp.empty() && res == '\0'){
+        current_bit = tmp.front();
+        tmp.pop_front();
+        if(current_bit)
+            current_nod = current_nod->right;
+        else 
+            current_nod = current_nod->left;
+        if(current_nod == NULL) break;
+        res = current_nod->val;                
+    }
+    if(res != '\0')
+        list = tmp;
     return res;
 }

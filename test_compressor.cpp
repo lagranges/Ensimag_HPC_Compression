@@ -2,8 +2,9 @@
 
 int main(){
     
-
-    Compressor comp = Compressor("mini.txt");
-    comp.generate("mini_comp.comp");
-    comp.display("mini_comp.comp");
+    Compressor comp = Compressor("sample.txt");
+    comp.generate("result_comp");
+    //comp.display();
+    Decompressor decomp = Decompressor("result_comp.comp");
+    decomp.generate("result_comp");
 }

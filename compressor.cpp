@@ -3,8 +3,10 @@
 Compressor::Compressor(string f){
     file_name = f;
     chars = Characters(file_name);
+    chars.display();
     Tree *t = new Tree(chars);
     dict = Dictionnary(*t);
+    dict.display();
 }
 
 void Compressor::generate(string compressed_file_name)
@@ -12,8 +14,8 @@ void Compressor::generate(string compressed_file_name)
     ifstream input_file;
     ofstream output_file;
     compressed_file = compressed_file_name; 
-    input_file.open(file_name);
-    output_file.open(compressed_file+".comp");
+    input_file.open(file_name.c_str());
+    output_file.open((compressed_file+".comp").c_str());
     BinaryCode binary_code ;
     // write the huffman information in the head of compressed file
     // It's suffient to save "chars" attribute
@@ -23,13 +25,16 @@ void Compressor::generate(string compressed_file_name)
     output_file << "s";
     while(!pq.empty())
     {
-        output_file << pq.top().nb_occurs;
+        output_file << pq.top().nb_occurs << endl;
         output_file << pq.top().val;
+        cout << " " << pq.top().nb_occurs << " " << pq.top().val << endl;
         pq.pop();
+        output_file << " ";
     }
     char ch, ctemp;
     // write the number of chars
     output_file << chars.get_nb_chars();
+    cout << chars.get_nb_chars() << endl;
     // encoding the characters
     while(input_file.get(ch))
     {
@@ -40,12 +45,11 @@ void Compressor::generate(string compressed_file_name)
         }
     }
     output_file << binary_code.get_one_byte();
-    cout << endl;
     input_file.close(); 
     output_file.close();
 }
 
-void ignore_head(ifstream *out_file){
+long long int ignore_head(ifstream *out_file){
     int size_chars;
     char val;
     long long int nb_occurs;
@@ -57,14 +61,18 @@ void ignore_head(ifstream *out_file){
     {
         *out_file >> nb_occurs;
         out_file->get(val);
+        out_file->get(val);
         pq.push(nod);
     }
+    *out_file >> nb_occurs;
+    cout << nb_occurs << endl;
+    return nb_occurs;
 }
 void Compressor::display()
 {
     ifstream in_file, out_file;
-    in_file.open(file_name);
-    out_file.open(compressed_file+".comp");
+    in_file.open(file_name.c_str());
+    out_file.open((compressed_file+".comp").c_str());
     char ch;
     ignore_head(&out_file);
     cout << "Original text :\n";
@@ -98,7 +106,7 @@ Decompressor::Decompressor(string f)
 {
     compressed_file = f;
     ifstream input_file;
-    input_file.open(compressed_file);
+    input_file.open(compressed_file.c_str());
     int size_chars;
     char val;
     long long int nb_occurs;
@@ -110,12 +118,16 @@ Decompressor::Decompressor(string f)
     {
         input_file >> nb_occurs;
         input_file.get(val);
+        input_file.get(val);
+        cout << i << " " << nb_occurs << " " << val << endl;
         node nod = node(val, nb_occurs, NULL, NULL);
         pq.push(nod);
     }
     chars = Characters(pq);
+    chars.display();
     tree = Tree(chars);
-    // dict.display();
+    dict = Dictionnary(tree);
+    dict.display();
 }
 
 void Decompressor::generate(string decompressed_file)
@@ -123,17 +135,18 @@ void Decompressor::generate(string decompressed_file)
     ifstream input_file;
     ofstream output_file;
     file_name = decompressed_file; 
-    input_file.open(compressed_file);
-    output_file.open(decompressed_file+".txt");
+    input_file.open(compressed_file.c_str());
+    output_file.open((decompressed_file+".txt").c_str());
     // ignore header
-    ignore_head(&input_file);
     BinaryCode binary_code,bc_temp ;
     char ch, ctemp;
     // read the number of chars
     long long int nb_chars;
-    input_file >> nb_chars;
+    //input_file >> nb_chars;
+    nb_chars = ignore_head(&input_file);
     chars.set_nb_chars(nb_chars);
     long long int count_chars = 0;
+    //cout << nb_chars << endl;
     // dencoding the characters
     while(input_file.get(ch) || count_chars < nb_chars )
     {

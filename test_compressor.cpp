@@ -2,7 +2,7 @@
 
 int main(){
     
-    Compressor comp = Compressor("sample.txt");
+    Compressor comp = Compressor("shakespeare.txt");
     comp.generate("result_comp");
     //comp.display();
     Decompressor decomp = Decompressor("result_comp.comp");

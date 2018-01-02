@@ -140,10 +140,10 @@ BinaryCode::BinaryCode(char c)
 char BinaryCode::get_first_char(Tree tree)
 {
     deque<BIT> tmp = list;
-    char res = '\0';
+    bool is_leaf = false;
     BIT current_bit;
     node* current_nod = tree.get_root();
-    while(!tmp.empty() && res == '\0'){
+    while(!tmp.empty() && !is_leaf){
         current_bit = tmp.front();
         tmp.pop_front();
         if(current_bit)
@@ -151,9 +151,9 @@ char BinaryCode::get_first_char(Tree tree)
         else 
             current_nod = current_nod->left;
         if(current_nod == NULL) break;
-        res = current_nod->val;                
+        is_leaf = current_nod->is_leaf();       
     }
-    if(res != '\0')
+    if(is_leaf)
         list = tmp;
-    return res;
+    return is_leaf?current_nod->val:'\0';
 }

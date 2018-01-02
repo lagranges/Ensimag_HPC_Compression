@@ -20,7 +20,7 @@ Tree::Tree(Characters chars)
             pq.pop();
             u2 = new node(pq.top());
             pq.pop();
-            u = new node('\0', u1->nb_occurs+u2->nb_occurs, u1, u2);
+            u = new node(u1->val, u1->nb_occurs+u2->nb_occurs, u1, u2);
             pq.push(*u);
         }
         this->root = u;

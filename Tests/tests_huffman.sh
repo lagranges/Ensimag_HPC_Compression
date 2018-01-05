@@ -14,6 +14,7 @@ else
 		echo "[ Result OK : $1 and $1.comp.txt are IDENTICAL  ]"
 	else
 		echo "[ Result KO : $1 and $1.comp.txt are DIFFERENTS ]"
+        echo $ok
 	fi
 fi ;
 

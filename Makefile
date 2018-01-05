@@ -9,15 +9,15 @@ RM_TEST = $(basename $(TEST_SOURCE))
 all: $(EXEC)
 
 $(EXEC):$(OBJ)
-	$(CC) -o $@ $(SOURCE_FILES) $(OBJ)
+	$(CC) -o $@ $(SOURCE_FILES) $(OBJ) -fopenmp
 	
 .cpp.o:
-	$(CC) -c $< -o $@
+	$(CC) -c $< -o $@ -fopenmp
 
 test: $(TEST_SOURCE)
 
 $(TEST_SOURCE): $(OBJ)
-	$(CC) -o $(basename $@) $@ $^
+	$(CC) -o $(basename $@) $@ $^ -fopenmp 
 
 clear:
 	rm -f *.o $(EXEC) $(RM_TEST)

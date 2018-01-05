@@ -19,6 +19,7 @@ class BinaryCode
         BinaryCode(deque<BIT> l):list(l){}; 
         BinaryCode(char c);
         deque<BIT> get_list(){return list;};
+        int size(){return list.size();};
         void push_back(BIT b){list.push_back(b); };
         void display();
         void operator+=(const BinaryCode& b);

@@ -37,6 +37,18 @@ For checking the result:
 cd Test
 ./tests_huffman.sh file_name
 ```
+For change the thread number:
+```
+change N_THREADS in compressor.hpp
+make clear && make
+```
+To generate a random text file:
+```
+make test
+./test_generator Number_of_megabyte file_name
+ex: ./test_generator 10 10M_text
+```
+
 ## Authors
 * BOROVEC Ondrej 
 * LE Van Tuan 

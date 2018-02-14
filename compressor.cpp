@@ -125,11 +125,9 @@ void Compressor::generate(string compressed_file_name)
     //chunk chunks[id_thread]-> *chunks[0];
     //dict.display();
     long long int count;
-    long long int count2;
-    #pragma omp parallel private(count2) private(id_thread) private(ch) private(binary_code) private(ctemp) private(count) num_threads(N_THREAD)
+    #pragma omp parallel private(id_thread) private(ch) private(binary_code) private(ctemp) private(count) num_threads(N_THREAD)
     {
         count = 0;
-        count2 = 0;
         id_thread = omp_get_thread_num();
         while(count<chunks[id_thread]->nb_chars){
            input_file_t[id_thread].get(ch);
@@ -140,7 +138,6 @@ void Compressor::generate(string compressed_file_name)
            while(binary_code.size()>=8){
                 ctemp = binary_code.get_one_byte();
                 output_file_t[id_thread] << ctemp;
-                count2++;
            }
         }
            ctemp = binary_code.get_one_byte();

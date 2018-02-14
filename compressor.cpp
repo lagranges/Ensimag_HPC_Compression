@@ -5,15 +5,15 @@
 
 Compressor::Compressor(string f){
     file_name = f;
-    clock_t begin = clock();
+    //clock_t begin = clock();
     chars = Characters(file_name);
     //chars.display();
     Tree *t = new Tree(chars);
     dict = Dictionnary(*t);
 
-    clock_t end = clock();
-    double elapsed_secs = double(end - begin) / CLOCKS_PER_SEC;
-    cout << "Huffman contruction Time: " << elapsed_secs << endl;
+    //clock_t end = clock();
+    //double elapsed_secs = double(end - begin) / CLOCKS_PER_SEC;
+    //cout << "Huffman contruction Time: " << elapsed_secs << endl;
     //dict.display();
 }
 
@@ -52,7 +52,7 @@ void Compressor::generate(string compressed_file_name)
     // chunk information
     long long int milestones = output_file.tellp();
     long long int frequencies[256] = {0};
-    clock_t begint = clock();
+    //clock_t begint = clock();
     input_filet.open(file_name.c_str());
     long long int chunk_nb_chars=0, chunk_nb_bytes =0, 
          milestone_chars = 0, milestone_bytes = milestones;
@@ -103,10 +103,10 @@ void Compressor::generate(string compressed_file_name)
         milestone_bytes += (chunk_nb_bytes/8+2);   
     }
 
-    clock_t endt = clock();
-    double elapsed_secst = double(endt - begint) / CLOCKS_PER_SEC;
-    cout << "Chunking time: " << elapsed_secst << endl;
-    clock_t begin = clock();
+    //clock_t endt = clock();
+    //double elapsed_secst = double(endt - begint) / CLOCKS_PER_SEC;
+    //cout << "Chunking time: " << elapsed_secst << endl;
+    //clock_t begin = clock();
     // encoding the characters
     output_file.seekp(milestones);
     for(int i=0; i < N_THREAD; i++){
@@ -153,9 +153,9 @@ void Compressor::generate(string compressed_file_name)
         output_file_t[N_THREAD-1] << chunks[i]->milestone_bytes;
         output_file_t[N_THREAD-1] << "s";
     }
-    clock_t end = clock();
-    double elapsed_secs = double(end - begin) / CLOCKS_PER_SEC;
-    cout << "Encoding time: " << elapsed_secs << endl;
+    //clock_t end = clock();
+    //double elapsed_secs = double(end - begin) / CLOCKS_PER_SEC;
+    //cout << "Encoding time: " << elapsed_secs << endl;
     input_file.close(); 
     for(int i=0; i < N_THREAD; i++){
         output_file_t[i].close();
@@ -289,7 +289,7 @@ void Decompressor::generate(string decompressed_file)
     chars.set_nb_chars(nb_chars);
     long long int count_chars = 0;
     // dencoding the characters
-    clock_t begin = clock();
+    //clock_t begin = clock();
     long long int chunk_nb_bytes,milestones = input_file.tellg();
     long long int milestone_bytes =milestones, milestone_chars =0;
     // read the last line
@@ -355,9 +355,9 @@ void Decompressor::generate(string decompressed_file)
         
     }
 
-    clock_t end = clock();
-    double elapsed_secs = double(end - begin) / CLOCKS_PER_SEC;
-    cout << "Decoding Time: " << elapsed_secs << endl;
+    //clock_t end = clock();
+    //double elapsed_secs = double(end - begin) / CLOCKS_PER_SEC;
+    //cout << "Decoding Time: " << elapsed_secs << endl;
     for(int i=0; i < N_THREAD; i++){
         output_file_t[i].close();
         input_file_t[i].close();
